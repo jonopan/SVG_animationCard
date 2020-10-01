@@ -1,0 +1,215 @@
+::before,
+::after{
+    box-sizing: border-box;
+}
+:root{
+    --clr-dark: rgb(33, 33, 34);
+    --clr-light: #fff;
+    --clr-accent: rgb(222, 52, 0);
+    --clr-accent-dark: rgb(163, 38, 0);
+    --clr-secondary: rgb(41, 125, 235);
+    --br: .5em;
+    --transition: transition: transform 200ms cubic-bezier(.21, 
+    1.00, .81, 1.00);
+}
+
+body{
+    font-family: sans-serif;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: var(--clr-dark);
+    color: var(--clr-light);
+
+}
+
+h1, h2, h3, p{
+    margin:0;
+}
+.img{
+    max-width: 100%;
+    max-height: 100%;
+}
+.game{
+    position:relative;
+    width: 12.5em; /* 200px */
+    cursor: pointer;
+}
+.btn{
+    cursor: pointer;
+    border: 0;
+    background: var(--clr-secondary);
+    border-radius: 100vw;
+    color: var(--clr-light);
+    font-weight: bold;
+    padding: .5em 1.5em;
+
+}
+.streamers{
+    display: flex;
+    text-align: center;
+}
+.front .streamers img {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+}
+.back-info .streamers img {
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+}
+
+
+.front .streamers img:nth-of-type(1){
+    transform: translateX(70%);
+    position: relative;
+    z-index: 1;
+} 
+.front .streamers img:nth-of-type(2){
+    transform: translateX(35%);
+}
+.rank{
+    position: absolute;
+    top: 0;
+    right: 1em;
+    font-weight: bold;
+    z-index: 1000;
+    font-size: 1.125rem;
+    background: rgba(255, 0, 0, 0.65);
+    padding: .5em .5em .75em;
+    clip-path: polygon(100% 0%, 100% 100%, 50% 85%, 0 100%, 0 0);
+    transition: var(--transition);
+}
+
+.front{
+    transition: 250ms;
+}
+.front .name{
+    margin: .75em 0;
+}
+.front .streamers img{
+    border: 2px solid var(--clr-dark);
+}
+/*round the corners of the cover image*/
+.front .thumbnail{
+    border-radius: var(--br);
+}
+
+.front .stats{
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /*the number will center vertically in that space*/
+}
+.back-info{
+    opacity: 0;
+    position: absolute;
+    top:54%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5em;
+}
+
+/*------------[back hover contents & placement]*/
+.back-info .streaming-info{
+    columns: 2;
+    column-rule: 1px solid rgba(255, 255, 255, .25);
+}
+.game-stat{
+    font-size: 1.125rem;
+    text-align: center;
+}
+.back-info .streaming-info span {
+    font-size: .85rem;
+    display: block;
+}
+.back-info .streamers{
+    width: 100%;
+    justify-content: space-between;
+}
+.back-info .streamer{
+    font-size: .75rem;
+}
+.back-info .name{
+    font-weight: bold;
+}
+
+.background{
+    background: rgb(48, 54, 63);
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1; /*push the background to the back*/
+    transform: scale(.2, .9);
+    border-radius: var(--br);
+}
+.game:hover .background{
+    transform: scale(1.4, 1.3);
+    opacity: 1;
+    transition: var(--transition),opacity 100ms linear;
+}
+
+/*------------[front hover]*/
+.game:hover .front{
+    transform: translateY(-35%) scale(.8); /*moving y-axis up & down and increase the image size*/
+}
+.game:hover .name{
+    animation: cardName 250ms forwards;
+}
+.game:hover .rank{
+    transform: translate(150%, -118%);
+}
+.game:hover .front .stats{
+    opacity: 0;
+}
+
+/*------------[back hover]*/
+.game:hover .back-info{
+    opacity: 1;
+}
+
+
+/*------------[grid 4*4]*/
+.grid-container {
+   
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    /*
+    margin-top: 150px;
+    grid-template-rows: 450px 450px;
+    grid-gap: 50px;
+    padding: 10px;
+    */
+  }
+  
+.grid-item {
+    padding: 20px;
+}
+
+@keyframes cardName{
+    0%{
+        text-align: left;
+        opacity: 1;
+    }
+    20%{
+        text-align: left;
+        opacity: 0;
+    }
+    50%{
+        text-align: center;
+        opacity: 0;
+        transform: scale(1.2);
+    }
+    100%{
+        text-align: center;
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
